@@ -1,0 +1,178 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  font-family: "Be Vietnam Pro", system-ui, sans-serif;
+  overflow: hidden;
+  background: #7ec8e3;
+}
+
+.bg {
+  position: fixed;
+  inset: 0;
+  background: url("photo_2026-08-19_15-03-42.jpg") center / cover no-repeat;
+  z-index: 0;
+}
+
+.glow {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 70% 50% at 50% 28%, rgba(255, 255, 255, 0.28), transparent 62%),
+    linear-gradient(180deg, rgba(232, 246, 255, 0.12) 0%, transparent 42%, rgba(20, 40, 20, 0.08) 100%);
+}
+
+.hero {
+  position: relative;
+  z-index: 2;
+  height: 100dvh;
+  min-height: 100dvh;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  width: min(560px, 100%);
+}
+
+.cta {
+  --delay: 0s;
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 20px 28px;
+  border-radius: 999px;
+  text-decoration: none;
+  text-align: center;
+  color: #3a2208;
+  background: linear-gradient(180deg, #ffe08a 0%, #f4c430 48%, #d4a017 100%);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.5) inset,
+    0 16px 36px rgba(212, 160, 23, 0.38),
+    0 0 0 6px rgba(255, 255, 255, 0.22);
+  overflow: hidden;
+  opacity: 0;
+  animation:
+    rise 0.7s cubic-bezier(0.22, 1, 0.36, 1) var(--delay) both,
+    pulse 2.4s ease-in-out calc(var(--delay) + 0.8s) infinite;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, filter 0.25s ease;
+}
+
+.cta:nth-child(2) {
+  --delay: 0.16s;
+}
+
+.cta:hover {
+  transform: translateY(-3px) scale(1.03);
+  filter: brightness(1.06);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.55) inset,
+    0 22px 44px rgba(212, 160, 23, 0.48),
+    0 0 0 7px rgba(255, 255, 255, 0.3);
+  animation-play-state: paused, paused;
+}
+
+.cta:active {
+  transform: translateY(0) scale(0.99);
+}
+
+.cta-title {
+  position: relative;
+  z-index: 1;
+  font-size: clamp(16px, 3.2vw, 24px);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+}
+
+.cta-shine {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: linear-gradient(
+    115deg,
+    transparent 28%,
+    rgba(255, 255, 255, 0.55) 48%,
+    transparent 68%
+  );
+  transform: translateX(-120%);
+  animation: shine 2.8s ease-in-out calc(var(--delay) + 0.9s) infinite;
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(22px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    box-shadow:
+      0 1px 0 rgba(255, 255, 255, 0.5) inset,
+      0 16px 36px rgba(212, 160, 23, 0.38),
+      0 0 0 6px rgba(255, 255, 255, 0.22);
+  }
+  50% {
+    box-shadow:
+      0 1px 0 rgba(255, 255, 255, 0.6) inset,
+      0 20px 40px rgba(212, 160, 23, 0.5),
+      0 0 0 10px rgba(255, 224, 138, 0.28);
+  }
+}
+
+@keyframes shine {
+  0%,
+  42% {
+    transform: translateX(-120%);
+  }
+  68%,
+  100% {
+    transform: translateX(120%);
+  }
+}
+
+@media (max-width: 640px) {
+  .actions {
+    gap: 14px;
+  }
+
+  .cta {
+    border-radius: 28px;
+    padding: 16px 20px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cta,
+  .cta-shine {
+    animation: none;
+    opacity: 1;
+  }
+}
